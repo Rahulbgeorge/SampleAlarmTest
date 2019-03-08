@@ -2,6 +2,7 @@ package com.example.rahul.alarm;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.app.job.JobService;
 import android.content.ComponentName;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,23 +40,35 @@ public class MainActivity extends AppCompatActivity {
         JobInfo info = new JobInfo.Builder(123, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPersisted(true)
-                .setPeriodic(10*60*1000)
+//                .setMinimumLatency(1000*60)
+                .setPeriodic(15*60*1000)
                 .build();
 
+
+
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.e(TAG, "Job scheduled");
         } else {
             Log.e(TAG, "Job scheduling failed");
         }
+
+
     }
+
 
     public void endAlarm(View view)
     {
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         scheduler.cancel(123);
         Log.e(TAG, "Job cancelled");
+    }
+
+    public void chargerService(View view)
+    {
+
     }
 }
 
