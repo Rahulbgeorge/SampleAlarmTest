@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void endAlarm(View view)
-    {
+    {//
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         scheduler.cancel(123);
         Log.e(TAG, "Job cancelled");
